@@ -4,7 +4,7 @@ import os
 
 # Load the data
 rivals_data = pd.read_csv(os.path.join('data_test', 'rivals_data_fuzzy_test.csv'))
-siren_data = pd.read_csv(os.path.join('data', 'siren_database.csv'))
+siren_data = pd.read_csv(os.path.join('data', 'siren_database_trimmed.csv'))
 
 rivals_data['RIVAL_NAME'] = rivals_data['RIVAL_NAME'].astype(str)
 siren_data['RIVAL_NAME'] = siren_data['RIVAL_NAME'].astype(str)
