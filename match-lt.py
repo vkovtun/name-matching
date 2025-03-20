@@ -12,7 +12,7 @@ rivals_data['apen2'] = rivals_data['apen2'].fillna(0)
 siren_data['apen2'] = siren_data['apen2'].fillna(0)
 
 result_csv_file = 'results/result-1-m.csv'
-merged_data = lt.merge(rivals_data, siren_data, merge_type='1:m', on=['RIVAL_NAME']) #, model='dell-research-harvard/lt-wikidata-comp-fr')
+merged_data = lt.merge_knn(rivals_data, siren_data, on=['RIVAL_NAME'], k=50, drop_sim_threshold=0.75) #, model='dell-research-harvard/lt-wikidata-comp-fr')
 merged_data.to_csv(result_csv_file)
 
 print(f"Results put to {result_csv_file}")
