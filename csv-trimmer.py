@@ -23,14 +23,17 @@ def process_large_csv(input_file, output_file):
 
         for row in tqdm(reader, total=total_lines, desc="Processing CSV", unit="rows"):
             if len(row) >= 5:  # Ensure the row has at least 5 columns
-                writer.writerow(row[:3] + row[4:])  # Skip the fourth column
+                combined_row = row[:2] + row[4:5]
+                trimmed_row = [cell.strip() if isinstance(cell, str) else cell for cell in combined_row]
+                writer.writerow(trimmed_row)  # Skip
             else:
-                writer.writerow(row)  # Write as-is if it has fewer columns
+                raise ValueError(f"Row {row} has length len(row)")
+                #writer.writerow(row)  # Write as-is if it has fewer columns
 
 
 if __name__ == "__main__":
     input_csv_path = "data/siren_database.csv"  # Change this to your actual input CSV file
-    output_csv_path = "data/siren_database_trimmed.csv"
+    output_csv_path = "data/siren_database_trimmed_2.csv"
 
     process_large_csv(input_csv_path, output_csv_path)
     print(f"Processed file saved as {output_csv_path}")
